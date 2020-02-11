@@ -25,6 +25,16 @@ export default class Server {
             res.status(200).json(req.query);
             return;
         });
+        this.app.get('/echo', (req: Request, res: Response, next: NextFunction) => {
+            const query = req.query.q;
+            console.log(`Recieved Request for ${req.path} with query ${JSON.stringify(req.query)}`);
+            if (query === undefined) {
+                res.status(400).send("There should query string q with this end point");
+                return;
+            }
+            res.status(200).json(req.query);
+            return;
+        });
     }
 
     /**
